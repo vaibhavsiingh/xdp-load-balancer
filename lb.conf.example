@@ -1,0 +1,13 @@
+# Example configuration for `lbctl run -c lb.conf`.
+iface      eth0
+vip        192.168.1.100
+xdp_mode   auto            # auto | generic | native | offload
+flow_cache on              # pin established flows; off = pure Maglev hashing
+
+# times in milliseconds
+health interval=1000 timeout=500 rise=2 fall=2
+
+# ip port [static-mac]; without a MAC it is learned from ARP after a probe succeeds
+backend 192.168.1.11 80
+backend 192.168.1.12 80
+backend 192.168.1.13 80 aa:bb:cc:00:00:13
