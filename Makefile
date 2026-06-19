@@ -33,5 +33,6 @@ build/test_lb: tests/test_lb.c src/maglev.c src/balancer.c src/*.h bpf/lb_common
 test: build/test_lb
 	./build/test_lb
 
+# build/demo may hold root-owned files from scripts/demo.sh
 clean:
-	rm -rf build
+	find build -mindepth 1 -maxdepth 1 ! -name demo -exec rm -rf {} +
