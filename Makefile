@@ -13,7 +13,7 @@ SRCS := src/lbctl.c src/maglev.c src/balancer.c
 
 .PHONY: all test clean
 
-all: build/lbctl
+all: build/lbctl build/bench_prog
 
 build/xdp_lb.bpf.o: bpf/xdp_lb.bpf.c bpf/lb_common.h
 	@mkdir -p build
@@ -25,6 +25,9 @@ build/xdp_lb.skel.h: build/xdp_lb.bpf.o
 
 build/lbctl: $(SRCS) src/*.h bpf/lb_common.h build/xdp_lb.skel.h
 	$(CC) $(CFLAGS) $(SRCS) -o $@ $(LDLIBS)
+
+build/bench_prog: tests/bench_prog.c src/maglev.c src/*.h bpf/lb_common.h build/xdp_lb.skel.h
+	$(CC) $(CFLAGS) tests/bench_prog.c src/maglev.c -o $@ $(LDLIBS)
 
 build/test_lb: tests/test_lb.c src/maglev.c src/balancer.c src/*.h bpf/lb_common.h
 	@mkdir -p build
