@@ -35,6 +35,7 @@ build/test_lb: tests/test_lb.c src/maglev.c src/balancer.c src/*.h bpf/lb_common
 
 test: build/test_lb
 	./build/test_lb
+	python3 -m unittest discover -s tests -t . -v
 
 # build/demo may hold root-owned files from scripts/demo.sh
 clean:
