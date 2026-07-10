@@ -7,7 +7,7 @@
 #   sudo scripts/demo.sh down    tear everything down
 #   sudo scripts/demo.sh all     up + test + down
 #
-# FLOW_CACHE=off sudo scripts/demo.sh up   disables the flow cache (for benchmarking)
+# sudo FLOW_CACHE=off scripts/demo.sh up   disables the flow cache (for benchmarking)
 #
 # Topology (one L2 segment, 10.0.0.0/24, joined by a bridge in the root ns):
 #   client .2   lb .1 (VIP .100, XDP on eth0)   be1 .11   be2 .12   be3 .13
