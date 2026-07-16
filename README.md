@@ -73,6 +73,7 @@ src/maglev.c         consistent-hash table generation
 src/health.h         rise/fall debouncing
 scripts/demo.sh      network-namespace demo
 scripts/bench.py     pktgen benchmark against the demo topology
+scripts/run_benchmarks.sh  runs every benchmark + the demo, raw output to results/
 tests/bench_prog.c   BPF_PROG_TEST_RUN microbenchmark of the XDP program
 tests/               unit tests (no root needed)
 ```
