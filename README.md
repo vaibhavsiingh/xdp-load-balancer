@@ -62,6 +62,36 @@ sudo build/lbctl detach -c lb.conf   # remove a stale attachment after a crash
 `xdp_mode`: `auto` (driver if supported, else generic), `native`, `generic`, `offload`.
 Use `generic` for veth / virtual NICs. Config format: see `lb.conf.example`.
 
+## Benchmark
+
+**Per-packet cost of the program alone** (`BPF_PROG_TEST_RUN`: no veth, bridge or
+per-packet timer; warm-cache lower bound; needs root, not the demo):
+
+```sh
+sudo build/bench_prog --cpu 2                  # flow cache on, 1024 flows
+sudo build/bench_prog --cpu 2 --cache off      # pure hash + Maglev path
+```
+
+Prints the forward path, a floor (non-VIP packet, early `XDP_PASS`) and the
+difference. Use the median over rounds; run it a few times -- laptop CPUs vary
+by 10%+ between runs.
+
+**End to end under load** (pktgen through the demo topology):
+
+```sh
+sudo scripts/demo.sh up
+sudo scripts/bench.py --duration 10 --flows 1024 --size 64   # pktgen -> VIP
+sudo scripts/demo.sh down
+sudo FLOW_CACHE=off scripts/demo.sh up                       # rerun with the cache off to compare
+```
+
+Reports pps sent / seen / forwarded, **ns per packet inside the XDP program**
+(from `kernel.bpf_stats_enabled`; includes a little timing overhead), flow-cache
+hit ratio and per-backend spread. `--flows 1` is the single-flow best case;
+many flows exercises Maglev and cache insertion. The demo is veth + generic XDP,
+so pps is bounded by the skb path -- quote the ns/packet figure, and for
+line-rate numbers run pktgen from another host against a real NIC in native mode.
+
 ## Layout
 
 ```
