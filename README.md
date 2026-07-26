@@ -64,6 +64,11 @@ Use `generic` for veth / virtual NICs. Config format: see `lb.conf.example`.
 
 ## Benchmark
 
+**Measured results: [RESULTS.md](RESULTS.md).** On a Ryzen 7 5800HS, the program
+costs 73 ns per packet (16 ns of it balancing) with the flow cache off, and 113 ns with it on.
+Spread over 3 backends is 33/34/33 %, and taking a backend down remaps 0.4 % of the other
+backends' slots. To rerun everything: `sudo scripts/run_benchmarks.sh` (output in `results/`).
+
 **Per-packet cost of the program alone** (`BPF_PROG_TEST_RUN`: no veth, bridge or
 per-packet timer; warm-cache lower bound; needs root, not the demo):
 

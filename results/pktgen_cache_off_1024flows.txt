@@ -1,0 +1,10 @@
+
+pktgen -> VIP  size=64B  flows=1024  threads=1  10.0s
+  sent by pktgen           213,795 pps   (0 tx errors)
+  seen by XDP              213,813 pps
+  forwarded (XDP_TX)       213,795 pps   (0 dropped, no backend)
+  time in XDP program         73.0 ns/pkt   (includes bpf_stats timing overhead)
+  flow cache hits             0.0 %
+  backend[0]               705,232 pkts   33.0%
+  backend[1]               727,943 pkts   34.0%
+  backend[2]               706,710 pkts   33.0%

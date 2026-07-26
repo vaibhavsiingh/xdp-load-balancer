@@ -1,0 +1,6 @@
+7.0.0-38-generic
+CPU(s):                                  16
+Model name:                              AMD Ryzen 7 5800HS with Radeon Graphics
+CPU(s) scaling MHz:                      41%
+Ubuntu clang version 21.1.8 (6ubuntu1)
+bpftool v7.7.0

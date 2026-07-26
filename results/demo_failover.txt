@@ -1,0 +1,28 @@
+04:30:54 INFO XDP program attached to eth0, VIP 10.0.0.100, 3 backend(s), flow cache on
+04:30:54 INFO backend 10.0.0.11:8080 is UP
+04:30:54 INFO backend 10.0.0.12:8080 is UP
+04:30:54 INFO lookup table: 4093/4093 slots updated, 2 healthy backend(s)
+04:30:55 INFO backend 10.0.0.13:8080 is UP
+04:30:55 INFO lookup table: 1384/4093 slots updated, 3 healthy backend(s)
+== 30 requests across 3 healthy backends
+     15 served by be1
+      9 served by be2
+      6 served by be3
+== counters
+rx_vip=210 forwarded=210 flow_cache_hits=180 dropped_no_backend=0 bytes_forwarded=16470
+backend[0] packets=105 bytes=8235
+backend[1] packets=63 bytes=4941
+backend[2] packets=42 bytes=3294
+== killing be2, waiting for health check to notice
+== 30 requests, be2 should be gone
+     12 served by be1
+     18 served by be3
+== lbctl log
+04:30:54 INFO XDP program attached to eth0, VIP 10.0.0.100, 3 backend(s), flow cache on
+04:30:54 INFO backend 10.0.0.11:8080 is UP
+04:30:54 INFO backend 10.0.0.12:8080 is UP
+04:30:54 INFO lookup table: 4093/4093 slots updated, 2 healthy backend(s)
+04:30:55 INFO backend 10.0.0.13:8080 is UP
+04:30:55 INFO lookup table: 1384/4093 slots updated, 3 healthy backend(s)
+04:30:58 INFO backend 10.0.0.12:8080 is DOWN
+04:30:58 INFO lookup table: 1375/4093 slots updated, 2 healthy backend(s)

@@ -1,0 +1,4 @@
+BPF_PROG_TEST_RUN: 1024 flows x 20000 reps, 7 rounds, 3 backends, flow cache on
+  forward path (VIP -> XDP_TX)      median  113.3 ns   min  109.2 ns
+  floor (non-VIP, early XDP_PASS)   median   58.8 ns   min   55.7 ns
+  attributable to balancing         median   54.5 ns
